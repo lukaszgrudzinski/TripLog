@@ -49,9 +49,18 @@
 	  <MauiXaml Update="Views\MainPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\NewEntryPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="NewFolder1\" />
+	  <Folder Include="NewFolder\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="System.Device.Location.Portable" Version="1.0.0" />
 	</ItemGroup>
 
 </Project>

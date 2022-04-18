@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TripLog.NewEntryPage"
+             Title="New Entry">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" />
+    </ContentPage.ToolbarItems>
+    <TableView Intent="Form">
+        <TableView.Root>
+            <TableSection>
+                <EntryCell Label="Title"/>
+                <EntryCell Label="Latitude"
+                           Keyboard="Numeric"/>
+                <EntryCell Label="Longtitude"
+                           Keyboard="Numeric"/>
+                <EntryCell Label="Date"/>
+                <EntryCell Label="Rating"
+                           Keyboard="Numeric"/>
+                <EntryCell Label="Notes"/>
+            </TableSection>
+        </TableView.Root>
+    </TableView>
+</ContentPage>
