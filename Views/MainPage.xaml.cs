@@ -43,4 +43,17 @@ public partial class MainPage : ContentPage
     {
 		Navigation.PushAsync(new NewEntryPage());
     }
+
+    private async void trips_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+		TripLogEntry trip = (TripLogEntry)e.CurrentSelection.FirstOrDefault();
+
+		if(trip != null)
+        {
+			await Navigation.PushAsync(new DetailsPage(trip));
+        }
+
+		//Clear selection
+		trips.SelectedItem = null;
+    }
 }

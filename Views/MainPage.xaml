@@ -10,7 +10,9 @@
     <StackLayout>
         <Button Text="New"
                 Clicked="New_Clicked"/>
-        <CollectionView x:Name="trips" >
+        <CollectionView x:Name="trips"
+                        SelectionMode="Single"
+                        SelectionChanged="trips_SelectionChanged">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="local:TripLogEntry">
                     <Grid Padding="10"
