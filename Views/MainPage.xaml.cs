@@ -24,4 +24,9 @@ public partial class MainPage : ContentPage
 		//Clear selection
 		trips.SelectedItem = null;
     }
+
+	private void New_Clicked(object sender, EventArgs e)
+	{
+		Navigation.PushAsync(new NewEntryPage());
+	}
 }

@@ -1,23 +1,31 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:TripLog.ViewModels"
+             x:DataType="local:NewEntryViewModel"
              x:Class="TripLog.NewEntryPage"
              Title="New Entry">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Save" />
+        <ToolbarItem Text="Save" Command="{Binding SaveCommand}" />
     </ContentPage.ToolbarItems>
     <TableView Intent="Form">
         <TableView.Root>
             <TableSection>
-                <EntryCell Label="Title"/>
+                <EntryCell Label="Title"
+                           Text="{Binding Title}"/>
                 <EntryCell Label="Latitude"
-                           Keyboard="Numeric"/>
+                           Keyboard="Numeric"
+                           Text="{Binding Latitude}"/>
                 <EntryCell Label="Longtitude"
-                           Keyboard="Numeric"/>
-                <EntryCell Label="Date"/>
+                           Keyboard="Numeric"
+                           Text="{Binding Longtitude}"/>
+                <EntryCell Label="Date"
+                           Text="{Binding Date, StringFormat='{0:d}'}"/>
                 <EntryCell Label="Rating"
-                           Keyboard="Numeric"/>
-                <EntryCell Label="Notes"/>
+                           Keyboard="Numeric"
+                           Text="{Binding Rating}"/>
+                <EntryCell Label="Notes"
+                           Text="{Binding Notes}"/>
             </TableSection>
         </TableView.Root>
     </TableView>
