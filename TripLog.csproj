@@ -58,11 +58,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="NewFolder1\" />
-	  <Folder Include="NewFolder\" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <PackageReference Include="System.Device.Location.Portable" Version="1.0.0" />
 	</ItemGroup>
 

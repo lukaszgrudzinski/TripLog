@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:TripLog.ViewModels"
              x:Class="TripLog.DetailsPage"
+             x:DataType="local:DetailsViewModel"
              Title="DetailsPage">
     <Grid RowDefinitions="4*,auto,1*">
         <Label Text="Replace with a map" 
@@ -15,11 +17,11 @@
                  Opacity="0.8" />
         <StackLayout Padding="10"
                      Grid.Row="1">
-            <Label x:Name="title"
+            <Label Text="{Binding Entry.Title}"
                    HorizontalOptions="Center"/>
-            <Label x:Name="date"
+            <Label Text="{Binding Entry.Date, StringFormat='{0:M}'}"
                    HorizontalOptions="Center"/>
-            <Label x:Name="rating"
+            <Label Text="{Binding Entry.Rating, StringFormat='{0} star rating'}"
                    HorizontalOptions="Center"/>
             <Label x:Name="notes"
                    HorizontalOptions="Center"/>

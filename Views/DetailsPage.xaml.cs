@@ -1,4 +1,5 @@
 using TripLog.Models;
+using TripLog.ViewModels;
 
 namespace TripLog;
 
@@ -8,9 +9,6 @@ public partial class DetailsPage : ContentPage
 	{
 		InitializeComponent();
 
-		title.Text = entry.Title;
-		date.Text = entry.Date.ToString("M");
-		rating.Text = $"{entry.Rating} star rating";
-		notes.Text = entry.Notes;
+		BindingContext = new DetailsViewModel(entry);
 	}
 }

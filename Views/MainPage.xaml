@@ -2,17 +2,18 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:TripLog.Models"
+             xmlns:localVm="clr-namespace:TripLog.ViewModels"
              x:Class="TripLog.MainPage"
+             x:DataType="localVm:MainViewModel"
              Title="TripLog">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="New" Clicked="New_Clicked" />
     </ContentPage.ToolbarItems>
     <StackLayout>
-        <Button Text="New"
-                Clicked="New_Clicked"/>
         <CollectionView x:Name="trips"
                         SelectionMode="Single"
-                        SelectionChanged="trips_SelectionChanged">
+                        SelectionChanged="trips_SelectionChanged"
+                        ItemsSource="{Binding LogEntries}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="local:TripLogEntry">
                     <Grid Padding="10"
