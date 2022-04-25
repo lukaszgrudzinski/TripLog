@@ -4,9 +4,9 @@ using TripLog.Models;
 
 namespace TripLog.ViewModels
 {
-    public class NewEntryViewModel : BaseViewModel
+    public class NewEntryViewModel : BaseValidationViewModel
     {
-        private string _title;
+        private string _title = string.Empty;
         public string Title
         {
             get => _title; 
@@ -14,9 +14,11 @@ namespace TripLog.ViewModels
             {
                 _title = value;
 
+                Validate(() => string.IsNullOrWhiteSpace(_title), "Title must be provided");
+
                 OnPropertyChanged();
 
-                _saveCommand.ChangeCanExecute();
+                _saveCommand?.ChangeCanExecute();
             }
         }
         private double _latitude;
@@ -57,10 +59,15 @@ namespace TripLog.ViewModels
             set
             {
                 _rating = value;
+
+                Validate(() => _rating >= 1 && _rating <= 5, "Rating must be between 1 and 5");
+
+                _saveCommand?.ChangeCanExecute();
+
                 OnPropertyChanged();
             }
         }
-        private string _notes;
+        private string _notes = string.Empty;
         public string Notes
         {
             get => _notes; 
@@ -71,12 +78,12 @@ namespace TripLog.ViewModels
             }
         }
 
-        private Command _saveCommand;
+        private Command? _saveCommand;
         public ICommand SaveCommand => _saveCommand ??= new Command(Save, CanSave);
 
         private bool CanSave(object arg)
         {
-            return !string.IsNullOrWhiteSpace(Title);
+            return !string.IsNullOrWhiteSpace(Title) && !HasErrors;
         }
 
         private void Save(object obj)
