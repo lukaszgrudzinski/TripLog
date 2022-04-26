@@ -1,10 +1,11 @@
 ﻿using TripLog.Models;
+using TripLog.Services;
 
 namespace TripLog.ViewModels
 {
-    public class DetailsViewModel : BaseViewModel
+    public class DetailsViewModel : BaseViewModel<TripLogEntry>
     {
-        private TripLogEntry _entry;
+        private TripLogEntry _entry = new();
         public TripLogEntry Entry
         {
             get => _entry;
@@ -15,9 +16,14 @@ namespace TripLog.ViewModels
             }
         }
 
-        public DetailsViewModel(TripLogEntry entry)
+        public DetailsViewModel(INavigationService navigationService) : base(navigationService)
         {
-            Entry = entry;
+            
+        }
+
+        public override void Init(TripLogEntry? entry)
+        {
+            Entry = entry ?? throw new ArgumentNullException(nameof(entry));
         }
     }
 }

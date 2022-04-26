@@ -1,11 +1,16 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
 using TripLog.Models;
+using TripLog.Services;
 
 namespace TripLog.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
-        private ObservableCollection<TripLogEntry> _logEntries;
+        public Command<TripLogEntry> ViewCommand => new(async entry => await NavigationService.NavigateTo<DetailsViewModel, TripLogEntry>(entry));
+        public Command NewCommand => new(async () => await NavigationService.NavigateTo<NewEntryViewModel>());
+
+        private ObservableCollection<TripLogEntry> _logEntries = new();
 
         public ObservableCollection<TripLogEntry> LogEntries
         {
@@ -16,7 +21,17 @@ namespace TripLog.ViewModels
                 OnPropertyChanged();
             }
         }
-        public MainViewModel()
+        public MainViewModel(INavigationService navigationService) : base(navigationService)
+        {
+
+        }
+
+        public override void Init()
+        {
+            LoadEntries();
+        }
+
+        private void LoadEntries()
         {
             LogEntries = new ObservableCollection<TripLogEntry>()
             {
@@ -45,7 +60,6 @@ namespace TripLog.ViewModels
                     GeoCoordinate = new System.Device.Location.GeoCoordinate(38, -77)
                 }
             };
-
         }
     }
 }

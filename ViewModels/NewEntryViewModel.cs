@@ -1,6 +1,7 @@
 ﻿using System.Device.Location;
 using System.Windows.Input;
 using TripLog.Models;
+using TripLog.Services;
 
 namespace TripLog.ViewModels
 {
@@ -100,7 +101,7 @@ namespace TripLog.ViewModels
             //TODO:Persistency
         }
 
-        public NewEntryViewModel()
+        public NewEntryViewModel(INavigationService navigationService) : base(navigationService)
         {
             Date = DateTime.Today;
             Rating = 1;

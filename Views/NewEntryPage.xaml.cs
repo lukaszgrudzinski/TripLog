@@ -1,3 +1,4 @@
+using TripLog.Services;
 using TripLog.ViewModels;
 
 namespace TripLog;
@@ -8,6 +9,6 @@ public partial class NewEntryPage : ContentPage
 	{
 		InitializeComponent();
 
-		BindingContext = new NewEntryViewModel();
+		BindingContext = new NewEntryViewModel(DependencyService.Get<INavigationService>());
 	}
 }

@@ -7,18 +7,21 @@
              x:DataType="localVm:MainViewModel"
              Title="TripLog">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="New" Clicked="New_Clicked" />
+        <ToolbarItem Text="New" Command="{Binding NewCommand}" />
     </ContentPage.ToolbarItems>
     <StackLayout>
         <CollectionView x:Name="trips"
                         SelectionMode="Single"
-                        SelectionChanged="trips_SelectionChanged"
                         ItemsSource="{Binding LogEntries}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="local:TripLogEntry">
                     <Grid Padding="10"
                           ColumnDefinitions="1*,3*"
                           RowDefinitions="auto,auto">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ViewCommand, Source={RelativeSource AncestorType={x:Type localVm:MainViewModel}}}}"
+                                                  CommandParameter="{Binding}"/>
+                        </Grid.GestureRecognizers>
                         <Label Grid.RowSpan="2"
                                Text="{Binding Date, StringFormat='{0:MMM d}'}"/>
                         <Label Grid.Column="1"

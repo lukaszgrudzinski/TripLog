@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using TripLog.Services;
 
 namespace TripLog.ViewModels
 {
@@ -10,6 +11,11 @@ namespace TripLog.ViewModels
         public bool HasErrors => _errors.All(e => e.Value.Any());
 
         public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
+
+        public BaseValidationViewModel(INavigationService navigationService) : base(navigationService)
+        {
+
+        }
 
         public IEnumerable GetErrors(string? propertyName)
         {
