@@ -80,14 +80,16 @@ namespace TripLog.ViewModels
         }
 
         private Command? _saveCommand;
-        public ICommand SaveCommand => _saveCommand ??= new Command(Save, CanSave);
+        private readonly ILocationService _locationService;
+
+        public ICommand SaveCommand => _saveCommand ??= new Command(async (a) => await Save(), CanSave);
 
         private bool CanSave(object arg)
         {
             return !string.IsNullOrWhiteSpace(Title) && !HasErrors;
         }
 
-        private void Save(object obj)
+        private async Task Save()
         {
             TripLogEntry newItem = new()
             {
@@ -99,12 +101,30 @@ namespace TripLog.ViewModels
             };
 
             //TODO:Persistency
+
+            await NavigationService.GoBack();
         }
 
-        public NewEntryViewModel(INavigationService navigationService) : base(navigationService)
+        public NewEntryViewModel(INavigationService navigationService, ILocationService locationService) : base(navigationService)
         {
             Date = DateTime.Today;
             Rating = 1;
+            _locationService = locationService;
+        }
+
+        public override async void Init()
+        {
+            try
+            {
+                Geocords coords = await _locationService.GetLocationAsync();
+
+                Latitude = coords.Latitude;
+                Longtitude = coords.Longitude;
+            }
+            catch (Exception)
+            {
+                //TODO: Handle exceptions from location service
+            }
         }
     }
 }

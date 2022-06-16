@@ -6,14 +6,21 @@ namespace TripLog;
 
 public partial class MainPage : ContentPage
 {
-	public MainPage()
+	private MainViewModel? ViewModel => BindingContext as MainViewModel;
+
+	public MainPage(MainViewModel vm)
 	{
 		InitializeComponent();
 
-		MainViewModel viewModel = new(DependencyService.Get<INavigationService>());
+		//viewModel.Init();
 
-		viewModel.Init();
-
-		BindingContext = viewModel;
+		BindingContext = vm;
 	}
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+		ViewModel?.Init();
+    }
 }

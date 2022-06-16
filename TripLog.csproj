@@ -6,6 +6,7 @@
 		<OutputType>Exe</OutputType>
 		<RootNamespace>TripLog</RootNamespace>
 		<UseMaui>true</UseMaui>
+		<UsingMauiEssentials>true</UsingMauiEssentials>
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
@@ -60,6 +61,10 @@
 
 	<ItemGroup>
 	  <PackageReference Include="System.Device.Location.Portable" Version="1.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Platforms\iOS\Services\" />
 	</ItemGroup>
 
 </Project>

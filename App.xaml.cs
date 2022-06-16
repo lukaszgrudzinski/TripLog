@@ -5,15 +5,17 @@ namespace TripLog;
 
 public partial class App : Application
 {
-	public App()
+	public static IServiceProvider ServiceProvider { get; set; }
+
+	public App(IServiceProvider serviceProvider)
 	{
+		ServiceProvider = serviceProvider;
+
 		InitializeComponent();
 
-		DependencyService.Register<INavigationService, XamarinFormsNavigationService>();
+		var navigationService = (new XamarinFormsNavigationService());
 
-		Page mainPage = new NavigationPage(new MainPage());
-
-        var navigationService = (XamarinFormsNavigationService)DependencyService.Get<INavigationService>();
+		Page mainPage = new NavigationPage(new MainPage(new MainViewModel(navigationService)));
 
 		navigationService.XamarinFormsNav = mainPage.Navigation;
 
